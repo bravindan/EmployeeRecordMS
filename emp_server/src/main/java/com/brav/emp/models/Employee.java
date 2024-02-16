@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 public class Employee {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstName;
     private String lastName;
@@ -26,7 +26,9 @@ public class Employee {
     private String cadre;
     @Column(unique = true)
     private String email;
+    @Column(unique = true)
     private String phoneNumber;
     private Boolean active;
+    private String salary;
 
 }

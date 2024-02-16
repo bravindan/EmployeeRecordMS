@@ -4,6 +4,7 @@ import com.brav.emp.models.Employee;
 import com.brav.emp.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
@@ -19,6 +20,28 @@ public class EmployeeService  {
     }
 
     public Employee addNewEmployee(Employee newEmployee) {
+        // Check if the newEmployee object is null
+        if (newEmployee == null) {
+            throw new IllegalArgumentException("Employee object cannot be null");
+        }
+
+        // Check if any required field is null or empty
+        if (!isValidEmployee(newEmployee)) {
+            throw new IllegalArgumentException("Employee data is incomplete");
+        }
         return employeeRepository.save(newEmployee);
+    }
+    private boolean isValidEmployee(Employee employee) {
+        return !StringUtils.isEmpty(employee.getFirstName()) &&
+                !StringUtils.isEmpty(employee.getLastName()) &&
+                !StringUtils.isEmpty(employee.getEmployeeNo()) &&
+                !StringUtils.isEmpty(employee.getEmail()) &&
+                !StringUtils.isEmpty(employee.getDob())&&
+                !StringUtils.isEmpty(employee.getCadre())&&
+                !StringUtils.isEmpty(employee.getDepartment())&&
+                !StringUtils.isEmpty(employee.getStartDate())&&
+                !StringUtils.isEmpty(employee.getEndDate())&&
+                !StringUtils.isEmpty(employee.getActive());
+        // Add more conditions for other required fields if necessary
     }
 }
