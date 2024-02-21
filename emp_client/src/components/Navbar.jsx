@@ -1,11 +1,13 @@
 import {} from 'react'
 import { FaBars, FaBell, FaSearch, FaUserCircle } from 'react-icons/fa'
 
-export default function Navbar() {
+// eslint-disable-next-line react/prop-types
+export default function Navbar({isSidebarOpen, setIsSidebarOpen}) {
   return (
-    <nav className='bg-gray-800 px-4 py-3 flex justify-between ml-64'>
+    <nav className='bg-gray-800 px-4 py-3 flex justify-between '>
         <div className='flex items-center text-xl'>
-            <FaBars className='text-white me-4 cursor-pointer'/>
+            <FaBars className='text-white me-4 cursor-pointer'
+            onClick={()=>setIsSidebarOpen(!isSidebarOpen)}/>
             <span className='text-white font-semibold'>Employee Records MS</span>
         </div>
         <div className='flex items-center gap-x-5'>

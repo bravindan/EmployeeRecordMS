@@ -1,9 +1,10 @@
 import {} from "react";
 import {FaBook, FaCog, FaHome, FaPlus} from "react-icons/fa"
 
-export default function Sidebar() {
+// eslint-disable-next-line react/prop-types
+export default function Sidebar({isSidebarOpen}) {
   return (
-    <div className="h-full w-64 fixed bg-gray-800 px-4 py-2">
+    <div className={`${isSidebarOpen ? "block ":"hidden"}  h-full w-64 fixed bg-gray-800 px-4 py-2`}>
         <div className="my-2 mb-4">
             <h1 className="text-2x text-white font-bold">Dashboard</h1>
         </div>

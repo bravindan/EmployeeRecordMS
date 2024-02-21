@@ -9,10 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/1.0/employees")
 public class EmployeeController {
-
     private EmployeeService employeeService;
-
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
@@ -32,12 +31,12 @@ public class EmployeeController {
 //            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
-    @PostMapping("/add")
+    @PostMapping("/new")
     public Employee addEmployee(@RequestBody Employee employee){
         Employee newEmployee = employeeService.addNewEmployee(employee);
         return newEmployee;
     }
-    @PutMapping("/edit/{id}")
+    @PatchMapping("/edit/{id}")
     Employee updateEmployee( @RequestBody Employee employee){
         Employee updatedEmployee = employeeService.updateEmployee(employee);
         return updatedEmployee;

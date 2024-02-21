@@ -30,5 +30,6 @@ public class Employee {
     private String phoneNumber;
     private Boolean active;
     private String salary;
+    private String gender;
 
 }
