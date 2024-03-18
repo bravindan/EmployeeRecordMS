@@ -9,16 +9,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/1.0/employees")
+@RequestMapping("/api/v1.0/employees")
 public class EmployeeController {
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
-    @GetMapping("/")
-    public List getEmployees(){
-        List<Employee> allEmployees = employeeService.getAllEmployees();
-        return allEmployees;
+    @GetMapping("")
+    public List<Employee> getEmployees(){
+        return employeeService.getAllEmployees();
     }
     @GetMapping("/{id}")
     public ResponseEntity<?> getEmployeeById(@PathVariable Long id) {
@@ -31,15 +30,13 @@ public class EmployeeController {
 //            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
-    @PostMapping("/new")
+    @PostMapping("")
     public Employee addEmployee(@RequestBody Employee employee){
-        Employee newEmployee = employeeService.addNewEmployee(employee);
-        return newEmployee;
+        return employeeService.addNewEmployee(employee);
     }
-    @PatchMapping("/edit/{id}")
+    @PatchMapping("/{id}")
     Employee updateEmployee( @RequestBody Employee employee){
-        Employee updatedEmployee = employeeService.updateEmployee(employee);
-        return updatedEmployee;
+        return employeeService.updateEmployee(employee);
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteEmployee(@PathVariable Long id){

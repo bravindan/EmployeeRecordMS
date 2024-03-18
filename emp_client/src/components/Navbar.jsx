@@ -1,6 +1,6 @@
 import {} from 'react'
 import { FaBars, FaBell, FaSearch, FaUserCircle } from 'react-icons/fa'
-
+// import { Link } from 'react-router-dom'
 // eslint-disable-next-line react/prop-types
 export default function Navbar({isSidebarOpen, setIsSidebarOpen}) {
   return (
@@ -25,9 +25,9 @@ export default function Navbar({isSidebarOpen, setIsSidebarOpen}) {
                     <FaUserCircle className='w-6 h-6 mt-1'/>
                     <div className='bg-white z-10 hidden absolute rounded-lg shadow w-32 group-focus:block top-full right-0'>
                         <ul className='py-2 text-sm text-gray-950'>
-                            <li><a href="">Profile</a></li>
-                            <li><a href="">Settings</a></li>
-                            <li><a href="">Log Out</a></li>
+                            <li><a href="/profile">Profile</a></li>
+                            <li><a href="/settings">Settings</a></li>
+                            <li><a href="/logout">Log Out</a></li>
                         </ul>
                     </div>
                 </button>
