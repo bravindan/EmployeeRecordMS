@@ -59,16 +59,17 @@ public class EmployeeService  {
                 !StringUtils.isEmpty(employee.getLastName()) &&
                 !StringUtils.isEmpty(employee.getEmployeeNo()) &&
                 !StringUtils.isEmpty(employee.getEmail()) &&
+                !StringUtils.isEmpty(employee.getPhoneNumber()) &&
                 !StringUtils.isEmpty(employee.getDob())&&
                 !StringUtils.isEmpty(employee.getCadre())&&
                 !StringUtils.isEmpty(employee.getDepartment())&&
                 !StringUtils.isEmpty(employee.getStartDate())&&
-                !StringUtils.isEmpty(employee.getEndDate())&&
+//                !StringUtils.isEmpty(employee.getEndDate())&&
                 !StringUtils.isEmpty(employee.getActive());
         // Add more conditions for other required fields if necessary
     }
 
-    public class RecordNotFoundException extends RuntimeException {
+    public static class RecordNotFoundException extends RuntimeException {
         public RecordNotFoundException(String message) {
             super(message);
         }

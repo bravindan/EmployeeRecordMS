@@ -8,9 +8,9 @@ export default function Dashboard() {
   return (
     <>
     <Sidebar/>
-    <div className="w-full pl-52">
+    <div className="w-full pl-52 ">
       <Navbar />
-      <main>
+      <main className=" mt-14">
         <Outlet/>
       </main>
     </div>

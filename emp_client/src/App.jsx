@@ -8,6 +8,7 @@ import Report from './pages/Report'
 import AddEmployee from './pages/AddEmployee';
 import Employees from './pages/Employees'
 import NotFound from './pages/NotFound';
+import EditEmployee from './pages/EditEmployee';
 
 
 
@@ -38,11 +39,15 @@ export default function App() {
           path: "/new",
           element: <AddEmployee/>,
         },
+        {
+          path: "/employee/:id",
+          element: <EditEmployee/>,
+        },
       ]
     }
   ]);
   return (
-    // TODO: Add react router dom navigation
+    
     <div>
       <RouterProvider router={router} />      
     </div>

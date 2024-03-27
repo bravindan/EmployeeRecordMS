@@ -11,9 +11,9 @@ export default function Navbar() {
   };
 
   return (
-    <nav className='bg-gray-800 px-4 py-3 flex justify-between'>
+    <nav className='bg-gray-800 px-4 py-3 flex justify-between fixed top-0 left-0 right-0 z-50 '>
       <div className='flex items-center text-xl'>
-        <FaBars className='text-white me-4 cursor-pointer'/>
+        <FaBars className='text-white mr-4 cursor-pointer'/>
         <span className='text-white font-semibold'>Employee Records MS</span>
       </div>
       <div className='flex items-center gap-x-5'>
@@ -26,11 +26,11 @@ export default function Navbar() {
         <div className='text-white'>
           <FaBell className='w-6 h-6'/>
         </div>
-        <div className='relative'>
+        <div className='relative z-50'>
           <button type="button" className='text-white group' onClick={toggleDropdown}>
             <FaUserCircle className='w-6 h-6 mt-1'/>
             {isDropdownOpen && (
-              <div className='bg-white z-10 absolute rounded-lg shadow w-32 top-full right-0'>
+              <div className='bg-white absolute rounded-lg shadow-lg w-32 top-full right-0 z-50'>
                 <ul className='py-2 text-sm text-gray-950'>
                   <li><Link to="/profile">Profile</Link></li>
                   <li><Link to="/settings">Settings</Link></li>

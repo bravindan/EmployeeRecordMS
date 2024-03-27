@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import {useParams, useNavigate } from "react-router-dom";
 
-export default function AddEmployee() {
-
-  const navigate = useNavigate()
-
+export default function EditEmployee() {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [employeeData, setEmployeeData] = useState({
     employeeNo: "",
     firstName: "",
@@ -21,6 +20,22 @@ export default function AddEmployee() {
     active: true,
     salary: "",
   });
+  const [loading, setLoading] = useState(true);
+  // console.log(id)
+  useEffect(() => {
+    const fetchEmployee = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/api/v1.0/employees/${id}`);
+        setEmployeeData(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching employee data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchEmployee();
+  }, [id]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -32,46 +47,28 @@ export default function AddEmployee() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(employeeData);
+    // console.log(employeeData)
     try {
-      await axios.post(
-        "http://localhost:8080/api/v1.0/employees",
-        employeeData
-      );
-      setEmployeeData({
-        // Reset form fields here
-        employeeNo: "",
-        firstName: "",
-        lastName: "",
-        email: "",
-        gender: "",
-        phoneNumber: "",
-        department: "",
-        cadre: "",
-        dob: "",
-        startDate: "",
-        endDate: "",
-        active: true,
-        salary: "",
-      });
-
-      alert("Employee added successfully!");
-      
+      await axios.patch(`http://localhost:8080/api/v1.0/employees/${id}`, employeeData);
+      alert("Employee updated successfully!");
       navigate("/"); // Redirect to employees listing page
-
     } catch (error) {
-      console.error("Failed to add employee:", error.error);
-      alert("Failed to add employee.");
+      console.error("Failed to update employee:", error);
+      alert("Failed to update employee.");
     }
   };
 
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2x font-bold">Fill Employee Details</h1>
-        <hr />
+      <h1 className="text-2xl font-bold">Edit Employee</h1>
+      <hr />
       <form onSubmit={handleSubmit} className="flex flex-wrap -m-2">
         <div className="w-full md:w-1/2 p-2">
-        <label htmlFor="employeeNo" className="block mb-1 font-semibold">Employee No</label>
+          <label htmlFor="employeeNo" className="block mb-1 font-semibold">Employee No</label>
           <input
             type="text"
             name="employeeNo"
@@ -80,7 +77,7 @@ export default function AddEmployee() {
             placeholder="Employee No"
             className="input mb-2 w-full p-2 border rounded"
           />
-          <label htmlFor="employeeNo" className="block mb-1 font-semibold">FirstName</label>
+          <label htmlFor="firstName" className="block mb-1 font-semibold">First Name</label>
           <input
             type="text"
             name="firstName"
@@ -89,7 +86,7 @@ export default function AddEmployee() {
             placeholder="First Name"
             className="input mb-2 w-full p-2 border rounded"
           />
-          <label htmlFor="employeeNo" className="block mb- font-semibold1">LastName</label>
+          <label htmlFor="lastName" className="block mb-1 font-semibold">Last Name</label>
           <input
             type="text"
             name="lastName"
@@ -98,7 +95,7 @@ export default function AddEmployee() {
             placeholder="Last Name"
             className="input mb-2 w-full p-2 border rounded"
           />
-          <label htmlFor="employeeNo" className="block mb-1 font-semibold">Email</label>
+          <label htmlFor="email" className="block mb-1 font-semibold">Email</label>
           <input
             type="email"
             name="email"
@@ -107,7 +104,7 @@ export default function AddEmployee() {
             placeholder="Email"
             className="input mb-2 w-full p-2 border rounded"
           />
-          <label htmlFor="employeeNo" className="block mb-1 font-semibold">Gender</label>
+          <label htmlFor="gender" className="block mb-1 font-semibold">Gender</label>
           <select
             name="gender"
             value={employeeData.gender}
@@ -118,7 +115,7 @@ export default function AddEmployee() {
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
-          <label htmlFor="employeeNo" className="block mb-1 font-semibold">Phone Number</label>
+          <label htmlFor="phone" className="block mb-1 font-semibold">Phone Number</label>
           <input
             type="text"
             name="phoneNumber"
@@ -129,7 +126,7 @@ export default function AddEmployee() {
           />
         </div>
         <div className="w-full md:w-1/2 p-2">
-        <label htmlFor="employeeNo" className="block mb-1 font-semibold">Department</label>
+          <label htmlFor="department" className="block mb-1 font-semibold">Department</label>
           <input
             type="text"
             name="department"
